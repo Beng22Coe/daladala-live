@@ -1,4 +1,3 @@
-import uuid
 from sqlalchemy import select
 from daladala_live.core.database import database
 from .models import User
