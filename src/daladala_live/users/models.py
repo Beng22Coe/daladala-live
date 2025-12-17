@@ -1,7 +1,8 @@
 # daladala_live/users/models.py
-from sqlalchemy import Column, Integer, String, Boolean
+from sqlalchemy import Column, Integer, String, Boolean, DateTime
+from sqlalchemy.sql import func
 from daladala_live.core.database import Base
-from daladala_live.utils import generate_public_id  # the function above
+from daladala_live.utils import generate_public_id
 
 
 class User(Base):
@@ -14,3 +15,8 @@ class User(Base):
     email = Column(String(255), unique=True, nullable=False)
     hashed_password = Column(String(255), nullable=False)
     is_active = Column(Boolean, default=True)
+    is_email_verified = Column(Boolean, default=False)
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+    updated_at = Column(
+        DateTime(timezone=True), onupdate=func.now(), server_default=func.now()
+    )
